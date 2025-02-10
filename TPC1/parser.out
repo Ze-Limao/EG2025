@@ -1,0 +1,167 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Sentence
+Rule 1     Sentence -> Signal Intervals DOT
+Rule 2     Signal -> PLUS
+Rule 3     Signal -> MINUS
+Rule 4     Intervals -> Interval RemainingIntervals
+Rule 5     RemainingIntervals -> <empty>
+Rule 6     RemainingIntervals -> Interval RemainingIntervals
+Rule 7     Interval -> LBRACKET NUM SEMICOLON NUM RBRACKET
+
+Terminals, with rules where they appear
+
+DOT                  : 1
+LBRACKET             : 7
+MINUS                : 3
+NUM                  : 7 7
+PLUS                 : 2
+RBRACKET             : 7
+SEMICOLON            : 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+Interval             : 4 6
+Intervals            : 1
+RemainingIntervals   : 4 6
+Sentence             : 0
+Signal               : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Sentence
+    (1) Sentence -> . Signal Intervals DOT
+    (2) Signal -> . PLUS
+    (3) Signal -> . MINUS
+
+    PLUS            shift and go to state 3
+    MINUS           shift and go to state 4
+
+    Sentence                       shift and go to state 1
+    Signal                         shift and go to state 2
+
+state 1
+
+    (0) S' -> Sentence .
+
+
+
+state 2
+
+    (1) Sentence -> Signal . Intervals DOT
+    (4) Intervals -> . Interval RemainingIntervals
+    (7) Interval -> . LBRACKET NUM SEMICOLON NUM RBRACKET
+
+    LBRACKET        shift and go to state 7
+
+    Intervals                      shift and go to state 5
+    Interval                       shift and go to state 6
+
+state 3
+
+    (2) Signal -> PLUS .
+
+    LBRACKET        reduce using rule 2 (Signal -> PLUS .)
+
+
+state 4
+
+    (3) Signal -> MINUS .
+
+    LBRACKET        reduce using rule 3 (Signal -> MINUS .)
+
+
+state 5
+
+    (1) Sentence -> Signal Intervals . DOT
+
+    DOT             shift and go to state 8
+
+
+state 6
+
+    (4) Intervals -> Interval . RemainingIntervals
+    (5) RemainingIntervals -> .
+    (6) RemainingIntervals -> . Interval RemainingIntervals
+    (7) Interval -> . LBRACKET NUM SEMICOLON NUM RBRACKET
+
+    DOT             reduce using rule 5 (RemainingIntervals -> .)
+    LBRACKET        shift and go to state 7
+
+    Interval                       shift and go to state 9
+    RemainingIntervals             shift and go to state 10
+
+state 7
+
+    (7) Interval -> LBRACKET . NUM SEMICOLON NUM RBRACKET
+
+    NUM             shift and go to state 11
+
+
+state 8
+
+    (1) Sentence -> Signal Intervals DOT .
+
+    $end            reduce using rule 1 (Sentence -> Signal Intervals DOT .)
+
+
+state 9
+
+    (6) RemainingIntervals -> Interval . RemainingIntervals
+    (5) RemainingIntervals -> .
+    (6) RemainingIntervals -> . Interval RemainingIntervals
+    (7) Interval -> . LBRACKET NUM SEMICOLON NUM RBRACKET
+
+    DOT             reduce using rule 5 (RemainingIntervals -> .)
+    LBRACKET        shift and go to state 7
+
+    Interval                       shift and go to state 9
+    RemainingIntervals             shift and go to state 12
+
+state 10
+
+    (4) Intervals -> Interval RemainingIntervals .
+
+    DOT             reduce using rule 4 (Intervals -> Interval RemainingIntervals .)
+
+
+state 11
+
+    (7) Interval -> LBRACKET NUM . SEMICOLON NUM RBRACKET
+
+    SEMICOLON       shift and go to state 13
+
+
+state 12
+
+    (6) RemainingIntervals -> Interval RemainingIntervals .
+
+    DOT             reduce using rule 6 (RemainingIntervals -> Interval RemainingIntervals .)
+
+
+state 13
+
+    (7) Interval -> LBRACKET NUM SEMICOLON . NUM RBRACKET
+
+    NUM             shift and go to state 14
+
+
+state 14
+
+    (7) Interval -> LBRACKET NUM SEMICOLON NUM . RBRACKET
+
+    RBRACKET        shift and go to state 15
+
+
+state 15
+
+    (7) Interval -> LBRACKET NUM SEMICOLON NUM RBRACKET .
+
+    LBRACKET        reduce using rule 7 (Interval -> LBRACKET NUM SEMICOLON NUM RBRACKET .)
+    DOT             reduce using rule 7 (Interval -> LBRACKET NUM SEMICOLON NUM RBRACKET .)
+
