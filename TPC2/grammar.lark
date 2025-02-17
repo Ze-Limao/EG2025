@@ -2,12 +2,12 @@ start: sentence
 
 ?sentence: signal intervals "."
 
-?signal: "+" -> plus
+signal: "+" -> plus
        | "-" -> minus
 
 ?intervals: interval (interval)*
 
-?interval: "[" NUMBER ":" NUMBER "]" -> interval
+interval: "[" NUMBER ":" NUMBER "]" -> interval
 
 %import common.NUMBER
 %import common.WS
