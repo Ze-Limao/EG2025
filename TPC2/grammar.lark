@@ -1,11 +1,11 @@
 start: sentence
 
-?sentence: signal intervals "."
+sentence: signal intervals "."
 
 signal: "+" -> plus
        | "-" -> minus
 
-?intervals: interval (interval)*
+intervals: interval (interval)*
 
 interval: "[" NUMBER ":" NUMBER "]" -> interval
 
