@@ -9,6 +9,6 @@ intervals: interval (interval)*
 
 interval: "[" NUMBER ":" NUMBER "]" -> interval
 
-%import common.NUMBER
+%import common.INT -> NUMBER 
 %import common.WS
 %ignore WS
