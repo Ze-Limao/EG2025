@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.toml": "toml",
+        "*.ttml": "xml",
+        "*.ttss": "css"
+    }
+}
