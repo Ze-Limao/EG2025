@@ -58,9 +58,9 @@ loop_loop: "loop" "(" bool_expr ")" "{" command* "}"
 
 conditional: check_command | match_command
 
-check_command: "check" "(" bool_expr ")" "{" command* "}" (elif_command)* (otherwise_command)?
+check_command: "check" "(" bool_expr ")" "{" command* "}" (also_command)* (otherwise_command)?
 
-elif_command: "elif" "(" bool_expr ")" "{" command* "}"
+also_command: "also" "(" bool_expr ")" "{" command* "}"
 
 otherwise_command: "otherwise" "{" command* "}"
 
@@ -116,7 +116,7 @@ task main() -> int {
     let int x = 10;
     check (x < 5) {
         show("x is less than 5");
-    } elif (x == 10) {
+    } also (x == 10) {
         show("x is 10");
     } otherwise {
         show("x is greater than 5 and not 10");
