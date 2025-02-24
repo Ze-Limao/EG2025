@@ -1,11 +1,11 @@
 from lark import Lark
 
 langrammar = """
-start: function_declaration* "task" "main" "()" "-" ">" TYPE "{" statement* return_statement "}"
+start: function_def* "task" "main" "()" "-" ">" TYPE "{" command* return_command "}"
 
-statement: variable_declaration ";"
-    | assignment ";"
-    | print_statement ";"
+command: variable_declaration ";"
+    | allocation ";"
+    | print_command ";"
     | function_call ";"
     | loop
     | conditional
@@ -14,12 +14,12 @@ statement: variable_declaration ";"
 
 variable_declaration: "let" TYPE VAR "=" expr
 
-assignment_aux: VAR ASS_OP expr
+allocation_aux: VAR ASS_OP expr
         | VAR "++"
         | VAR "--"
                     
-assignment: VAR "=" expr
-        | assignment_aux
+allocation: VAR "=" expr
+        | allocation_aux
         
 expr: VAR
     | NUMBER
@@ -28,15 +28,15 @@ expr: VAR
     | expr OP expr
     | expr LOGICAL_OP expr
     
-print_statement: "show" "(" VAR ")"
+print_command: "show" "(" VAR ")"
         | "show" "(" NUMBER ")"
         | "show" "(" STRING ")"
         
-function_declaration: "task" VAR "(" param_list? ")" "-" ">" TYPE "{" statement* return_statement "}"
+function_def: "task" VAR "(" parametros? ")" "-" ">" TYPE "{" command* return_command "}"
 
-return_statement: "return" expr ";"
+return_command: "return" expr ";"
 
-param_list: param "," param_list
+parametros: param "," parametros
     | param
 
 param: TYPE VAR
@@ -46,39 +46,45 @@ function_call: VAR "(" arg_list? ")"
 arg_list: expr "," arg_list
     | expr
 
-loop: for_loop | while_loop
+loop: for_loop | loop_loop
 
-for_loop: "for" "(" variable_declaration ";" for_cond ";" for_update ")" "{" statement* "}" 
+for_loop: "for" "(" variable_declaration ";" for_cond ";" for_update ")" "{" command* "}" 
 
 for_cond: bool_expr
 
-for_update: assignment_aux
+for_update: allocation_aux
 
-while_loop: "loop" "(" bool_expr ")" "{" statement* "}"
+loop_loop: "loop" "(" bool_expr ")" "{" command* "}"
 
-conditional: if_statement | switch_statement
+conditional: check_command | match_command
 
-if_statement: "check" "(" bool_expr ")" "{" statement* "}" (elif_statement)* (else_statement)?
+check_command: "check" "(" bool_expr ")" "{" command* "}" (elif_command)* (otherwise_command)?
 
-elif_statement: "elif" "(" bool_expr ")" "{" statement* "}"
+elif_command: "elif" "(" bool_expr ")" "{" command* "}"
 
-else_statement: "otherwise" "{" statement* "}"
+otherwise_command: "otherwise" "{" command* "}"
 
-switch_statement: "match" "(" expr ")" "{" case_statement* default_statement? "}"
+match_command: "match" "(" expr ")" "{" option_command* standard_command? "}"
 
-case_statement: "option" expr ":" statement*
+option_command: "option" expr ":" command*
 
-default_statement: "standard" ":" statement*
+standard_command: "standard" ":" command*
 
 bool_expr: expr LOGICAL_OP expr
     | function_call
 
-TYPE.2: "int" | "double" | "string" | "set" | "array" | "tuplo"
+TYPE: "int" | "double" | "tuple" | "string" | "array" | "bool" | "void"
+
 VAR: /[a-z]+(_[a-z]+)*/
+
 NUMBER: /-?\\d+(\\.\\d+)?/
+
 STRING: /".*"/
+
 OP: "+" | "-" | "*" | "/"
+
 LOGICAL_OP: "==" | "!=" | "<=" | ">=" | "<" | ">"
+
 ASS_OP: "+=" | "-=" | "*=" | "/="
 
 %import common.WS
@@ -98,6 +104,9 @@ task main() -> int {
     }
     
     for (let int j = 0; j < 3; j++) {
+        check(i == j) {
+            break;    
+        }
         show(j);
     }
     
@@ -116,10 +125,8 @@ task main() -> int {
     match (x) {
         option 5:
             show("x is 5");
-            break;
         option 10:
             show("x is 10");
-            break;
         standard:
             show("x is neither 5 nor 10");
     }
