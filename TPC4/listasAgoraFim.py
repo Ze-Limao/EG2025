@@ -22,16 +22,15 @@ class intervalTransformerAcceptence(Transformer):
                 print(f"Error: Constraint CC1 violated. agora should appead before the fim).")
                 self.erro = True
                 return None  # Skip invalid interval
-            if self.podeAcabar[-1]:
+            if not self.podeAcabar[-1]:
                 print(f"Error: Constraint CC1 violated. should appear a number between agora and fim).")
                 self.erro = True
                 return None  # Skip invalid interval
             self.started -=1
             self.podeAcabar.pop()
         else:
-            print("number appeared")
             if self.started != 0:
-                print("number appeared")
+                print("number appeared b")
                 self.podeAcabar[-1] = True
 
         return {valor}
