@@ -1,0 +1,16 @@
+start: sentence
+
+sentence: LISTA valores "."
+
+LISTA: ("LISTA"|"Lista")
+
+valores: valor ("," valor)*
+
+valor:  NUMBER
+     |  WORD
+
+
+%import common.INT -> NUMBER 
+%import common.WORD
+%import common.WS
+%ignore WS
