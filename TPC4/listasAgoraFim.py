@@ -30,17 +30,16 @@ class intervalTransformerAcceptence(Transformer):
             self.podeAcabar.pop()
         else:
             if self.started != 0:
-                print("number appeared b")
                 self.podeAcabar[-1] = True
 
-        return {valor}
+        return {"ok"}
 
     @v_args(inline=True)
     def valores(self, *valores):
         return [valor for valor in valores if valor is not None]
 
     @v_args(inline=True)
-    def sentence(self, valores):
+    def sentence(self, a,valores):
         return {"valores": valores}
 
     @v_args(inline=True)
