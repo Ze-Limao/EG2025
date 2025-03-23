@@ -46,6 +46,8 @@ class intervalTransformerAcceptence(Transformer):
 
     @v_args(inline=True)
     def sentence(self, a,valores):
+        #print(f"printing valores:{valores}")
+        print(f"printing a:{a}")
         return {"valores": valores}
 
     @v_args(inline=True)
@@ -95,7 +97,7 @@ class intervalTransformerProcess(Transformer):
             #"valores": valores,
             "soma": self.sum,
             "mais_frequentes": most_frequent,
-            "n_elemtos": len(self.elements)
+            "n_elementos": len(self.elements)
         }
 
     @v_args(inline=True)
