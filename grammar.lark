@@ -1,0 +1,18 @@
+start: (turmas)+
+
+turmas: turma alunos "."
+
+turma: "TURMA" PALAVRA
+
+alunos: aluno (";" aluno)*
+
+aluno: PALAVRA "(" valores ")"
+
+valores: valor ("," valor)*
+
+valor:  NUMERO
+PALAVRA:("A".."Z"|"a".."z")+
+NUMERO:"0".."9"+
+
+%import common.WS
+%ignore WS
