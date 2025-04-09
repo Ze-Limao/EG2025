@@ -1,5 +1,4 @@
 def print_results(varDec, varNotDec, varReDec):
-    print(varDec)
     print("\n📦 Variáveis Declaradas (varDec):")
     for func, vars in varDec.items():
         print(f"\n  Função: {func}")
