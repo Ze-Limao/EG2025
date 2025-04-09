@@ -1,0 +1,55 @@
+task add(int a, int b) -> int {
+    let int arroz = 0;
+    arroz++;
+    let int arroz = 0;
+    arroz++;
+    let int arroz = 0;
+    arroz++;
+    let int arroz = 0;
+    let int a = 0;
+
+    return a + b;
+}
+
+task sub(int a, int c) -> int {
+    return a - c;
+}
+
+task main() -> int {
+    let int i = 0;
+    a++;
+    loop (i <= 5) {
+        show(i);
+        i++;
+    }
+    
+    for (let int j = 0; j < 3; j++) {
+        check(i == j) {
+            break;    
+        }
+        show(j);
+    }
+    
+    let int result = add(3, 4);
+    show(result);
+    
+    let int x = 10;
+    check (x < 5) {
+        show("x is less than 5");
+    } also (x == 10) {
+        show("x is 10");
+    } otherwise {
+        show("x is greater than 5 and not 10");
+    }
+    
+    match (x) {
+        option 5:
+            show("x is 5");
+        option 10:
+            show("x is 10");
+        standard:
+            show("x is neither 5 nor 10");
+    }
+    
+    return 0;
+}
