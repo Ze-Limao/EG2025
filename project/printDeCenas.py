@@ -15,7 +15,7 @@ def print_results(varDec, varNotDec, varReDec):
     else:
         print("  (nenhuma)")
 
-    print("\n♻️ Variáveis Re-declaradas (varReDec):")
+    print("\n♻️  Variáveis Re-declaradas (varReDec):")
     if varReDec:
         for func, entries in varReDec.items():
             print(f"\n  Função: {func}")
@@ -64,6 +64,24 @@ def print_type_summary(varDec):
                 tipo_count[tipo] = 0
             tipo_count[tipo] += 1
 
-    print("\n Total de Variáveis por Tipo de Dados:")
+    print("\n📋Total de Variáveis por Tipo de Dados:")
     for tipo, count in tipo_count.items():
         print(f"  - {tipo}: {count}")
+
+
+
+def print_analysis_results(results):
+    print("\n📊 Total de instruções por tipo:")
+    for tipo, total in results.items():
+        print(f"  - {tipo}: {total}")  # ifs: check|match|also|otherwise|option|standard
+
+def print_total_aninhados(results):
+    print(f"\n🪜  Total de estruturas de controlo aninhadas: {results}")
+
+def print_possiveis_Opt_ifs(results):
+    print("\n🗿 Ifs aninhados que podem ser fundidos:")
+    if results:
+        for i, _ in enumerate(results, 1):
+            print(f"  {i}. Possível if aninhado fundível encontrado")
+    else:
+        print("  Nenhum caso identificado")

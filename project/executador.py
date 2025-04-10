@@ -1,9 +1,12 @@
 from lark import Lark
 from interpreterReservedWords import InterpreterReservedWords
-from printDeCenas import print_results, print_warnings_and_errors, print_type_summary
+from interpreterCondicoesECiclos import InterpreterCondicoesECiclos
+from printDeCenas import print_results, print_warnings_and_errors, print_type_summary, print_analysis_results,print_total_aninhados,print_possiveis_Opt_ifs
 
 langrammar = """
-start: function_def* "task" "main" "()" "-" ">" ret_type "{" command* return_command "}"
+start: function_def* main_func
+
+main_func : "task" "main" "()" "-" ">" ret_type "{" command* return_command "}"
 
 ret_type: TYPE      -> return_type
 
@@ -111,14 +114,21 @@ def main():
 
     analyzer = InterpreterReservedWords()
     analyzer.visit(tree)
+    analyzer2 = InterpreterCondicoesECiclos()
+    analyzer2.visit(tree)
     varDec, varNotDec,varReDec = analyzer.get_results()
 
+    counts, aninhamentos, if_fundidos = analyzer2.summarize()
+ 
     
     while True:
         print("\n📋 MENU:")
         print("1. Mostrar variáveis (declaradas, não declaradas e re-declaradas)")
         print("2. Mostrar warnings e erros")
         print("3. Mostrar total de variáveis por tipo de dados")
+        print("4. Mostar total de instruções por tipo")
+        print("5. Mostar total de estruturas de controlo aninhadas")
+        print("6. Mostrar ifs aninhados que podem ser unidos")
         print("0. Sair")
 
         opcao = input("\nEscolha uma opção: ").strip()
@@ -129,6 +139,12 @@ def main():
             print_warnings_and_errors(varDec, varNotDec, varReDec)
         elif opcao == "3":
             print_type_summary(varDec)
+        elif opcao == "4":
+            print_analysis_results(counts)
+        elif opcao == "5":
+            print_total_aninhados(aninhamentos)
+        elif opcao == "6":
+            print_possiveis_Opt_ifs(if_fundidos)
         elif opcao == "0":
             print("👋 Saindo...")
             break

@@ -1,4 +1,6 @@
-start: function_def* "task" "main" "()" "-" ">" ret_type "{" command* return_command "}"
+start: function_def* main_func
+
+main_func : "task" "main" "()" "-" ">" ret_type "{" command* return_command "}"
 
 ret_type: TYPE      -> return_type
 

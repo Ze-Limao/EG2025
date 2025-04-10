@@ -15,6 +15,9 @@ class InterpreterReservedWords(Interpreter):
         for child in tree.children:
             self.visit(child)
 
+    def main_func(self,tree):
+        for child in tree.children:
+            self.visit(child)
         # no final, adiciona o escopo de main
         if self.current_func == "main":
             self.varDec["main"] = self._current_scope_vars
@@ -47,8 +50,6 @@ class InterpreterReservedWords(Interpreter):
             else:
                 self.varReDec[self.current_func] += [{var:self._current_scope_vars[var]}]
                 self._current_scope_vars[var] = {"tipo": tipo, "ocorr": 0, "redec":True}
-
-
 
         self.visit(tree.children[2])  # expr
 

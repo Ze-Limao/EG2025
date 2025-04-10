@@ -15,13 +15,11 @@
 
 1. Lista de todas as vari´aveis do programa indicando os casos de: redeclara¸c˜ao ou n˜ao-declara¸c˜ao; vari´aveis
    usadas mas n˜ao inicializadas; vari´aveis declaradas e nunca mencionadas.
-
-agr é so passar isto para uma tabela e já está, em termos de warnings:
-se tem redeclaradas com 0 ocorrencias podem ser apagadas,
-se tem atuais com o ocorrencias podem ser apagadas,
-se tem redec = true tem um warning a dizer que foi redeclarada
-em termos de erros:
-não declaradas 🙂
+2. Total de var´aveis declaradas por cada Tipo de dados usados.
+3. Total de instru¸c˜oes que formam o corpo do programa, indicando o n´umero de instru¸c˜oes de cada tipo (atribui¸c˜oes,
+   leitura e escrita, condicionais e c´ıclicas).
+4. Total de situa¸c˜oes em que estruturas de controlo surgem aninhadas em outras estruturas de controlo do mesmo
+   ou de tipos diferentes.
 
 ## o que eu quero
 

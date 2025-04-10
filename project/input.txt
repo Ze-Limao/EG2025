@@ -1,13 +1,9 @@
 task add(int a, int b) -> int {
-    let int arroz = 0;
-    arroz++;
-    let int arroz = 0;
-    arroz++;
-    let int arroz = 0;
-    arroz++;
-    let int arroz = 0;
-    let int a = 0;
-
+    check (x > 0) {
+        check (x < 10) {
+            b++;
+        }
+    }
     return a + b;
 }
 
