@@ -1,9 +1,11 @@
 task add(int a, int b) -> int {
-    check (x > 0) {
-        check (x < 10) {
-            b++;
-        }
+    check (x < 10) {
+            check (x > 0) {
+                b += 1;
+            }
     }
+    a++;
+
     return a + b;
 }
 
@@ -31,9 +33,13 @@ task main() -> int {
     
     let int x = 10;
     check (x < 5) {
-        show("x is less than 5");
+        check (y > 11) {
+            show("x is less than 5");
+        }
     } also (x == 10) {
-        show("x is 10");
+        check (y > 11) {
+            show("x is 10");
+        }
     } otherwise {
         show("x is greater than 5 and not 10");
     }

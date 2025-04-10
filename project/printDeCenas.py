@@ -1,3 +1,5 @@
+from lark import Tree
+
 def print_results(varDec, varNotDec, varReDec):
     print("\n📦 Variáveis Declaradas (varDec):")
     for func, vars in varDec.items():
@@ -80,8 +82,56 @@ def print_total_aninhados(results):
 
 def print_possiveis_Opt_ifs(results):
     print("\n🗿 Ifs aninhados que podem ser fundidos:")
-    if results:
-        for i, _ in enumerate(results, 1):
-            print(f"  {i}. Possível if aninhado fundível encontrado")
-    else:
+    if not results:
         print("  Nenhum caso identificado")
+        return
+
+    for i, tree in enumerate(results, 1):
+        print(f"\n  {i}. 🌿 Possível if aninhado fundível encontrado:")
+
+        # ➤ Condição exterior
+        try:
+            if isinstance(tree.children[0], Tree) and tree.children[0].data == "bool_expr":
+                condicao_exterior = tree.children[0]
+                print("     📌 Condição exterior:")
+                print("      ➤", _format_bool_expr(condicao_exterior))
+        except Exception as e:
+            print("     ⚠️ Erro ao extrair condição exterior:", e)
+
+        # ➤ Condição interior (com navegação defensiva)
+        condicao_interior = None
+        try:
+            # Procuramos no 'command' do if exterior
+            for child in tree.children:
+                if isinstance(child, Tree) and child.data == "command":
+                    for sub in child.children:
+                        if isinstance(sub, Tree) and sub.data == "conditional":
+                            for inner_if in sub.children:
+                                if isinstance(inner_if, Tree) and inner_if.data == "check_command":
+                                    if isinstance(inner_if.children[0], Tree) and inner_if.children[0].data == "bool_expr":
+                                        condicao_interior = inner_if.children[0]
+                                        break
+        except Exception as e:
+            print("     ⚠️ Erro ao aceder à condição interior:", e)
+
+        if condicao_interior:
+            print("     📌 Condição interior:")
+            print("      ➤", _format_bool_expr(condicao_interior))
+        else:
+            print("     ⚠️ Nenhuma condição interior encontrada")
+
+def _format_bool_expr(tree):
+    """Tenta extrair uma expressão lógica legível de um bool_expr"""
+    try:
+        left = _extract_expr_value(tree.children[0])
+        op = tree.children[1]
+        right = _extract_expr_value(tree.children[2])
+        return f"{left} {op} {right}"
+    except:
+        return "<expressão lógica complexa>"
+
+def _extract_expr_value(expr_tree):
+    """Extrai o valor de uma expressão simples (VAR, NUMBER, STRING...)"""
+    if isinstance(expr_tree, Tree) and len(expr_tree.children) == 1:
+        return str(expr_tree.children[0])
+    return str(expr_tree)

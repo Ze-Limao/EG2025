@@ -1,4 +1,5 @@
 from lark.visitors import Interpreter
+from lark import Tree
 
 class InterpreterCondicoesECiclos(Interpreter):
     def __init__(self):
@@ -59,11 +60,40 @@ class InterpreterCondicoesECiclos(Interpreter):
     def check_command(self, tree):
         if self.control_stack:
             self.aninhamentos += 1
-
+    
         self.counts["condicionais"] += 1
         self.control_stack.append("check")
+    
+        subchecks = 0
+        other_commands = 0
+    
+        for child in tree.children:
+            if isinstance(child, Tree) and child.data == "command" and len(child.children) > 0:
+                grandchild = child.children[0]
+        
+                # Verifica se é conditional com exatamente 1 filho e esse filho é check_command
+                if (
+                    isinstance(grandchild, Tree)
+                    and grandchild.data == "conditional"
+                    and len(grandchild.children) == 1
+                    and isinstance(grandchild.children[0], Tree)
+                    and grandchild.children[0].data == "check_command"
+                    and not any(
+                        isinstance(child, Tree) and child.data in {"also_command", "otherwise_command"}
+                        for child in tree.children)
+                ):
+                    subchecks += 1
+                else:
+                    other_commands += 1
+
+    
+        if subchecks == 1 and other_commands == 0:
+            self.if_fundidos.append(tree)
+    
         self.visit_children(tree)
         self.control_stack.pop()
+    
+
 
     def also_command(self, tree):
         self.counts["condicionais"] += 1

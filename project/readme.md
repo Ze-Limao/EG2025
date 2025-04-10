@@ -20,6 +20,7 @@
    leitura e escrita, condicionais e c´ıclicas).
 4. Total de situa¸c˜oes em que estruturas de controlo surgem aninhadas em outras estruturas de controlo do mesmo
    ou de tipos diferentes.
+5. Lista de situa¸c˜oes em que existam ifs aninhados que possam ser substitu´ıdos por um s´o if
 
 ## o que eu quero
 
