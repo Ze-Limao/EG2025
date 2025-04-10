@@ -43,7 +43,11 @@ task main() -> int {
     } otherwise {
         show("x is greater than 5 and not 10");
     }
-    
+
+    let array arr = [3,2,1];
+
+    show(arr[2]);
+
     match (x) {
         option 5:
             show("x is 5");

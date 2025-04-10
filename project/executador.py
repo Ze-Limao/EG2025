@@ -28,16 +28,24 @@ allocation_aux: VAR ASS_OP expr
 allocation: VAR "=" expr
         | allocation_aux
         
+array_expr: "[" element_list? "]"
+
+element_list: NUMBER ("," NUMBER)*
+
+array_access: VAR "[" NUMBER "]"
+
 expr: VAR
     | NUMBER
     | STRING
     | function_call
     | expr OP expr
     | expr LOGICAL_OP expr
+    | array_expr
     
 print_command: "show" "(" VAR ")"
         | "show" "(" NUMBER ")"
         | "show" "(" STRING ")"
+        | "show" "(" array_access ")"
         
 function_def: "task" VAR "(" parametros? ")" "-" ">" TYPE "{" command* return_command "}"
 
