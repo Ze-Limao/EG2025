@@ -1,8 +1,10 @@
 task add(int a, int b) -> int {
-    check (x < 10) {
-            check (x > 0) {
-                b += 1;
-            }
+    let int arroz = 10;
+    let int arroz = 10;
+    check (a < 10) {
+        check (b > 0) {
+            b += 1;
+        }
     }
     a++;
 
@@ -37,9 +39,7 @@ task main() -> int {
             show("x is less than 5");
         }
     } also (x == 10) {
-        check (y > 11) {
             show("x is 10");
-        }
     } otherwise {
         show("x is greater than 5 and not 10");
     }

@@ -82,43 +82,26 @@ def print_total_aninhados(results):
 
 def print_possiveis_Opt_ifs(results):
     print("\n🗿 Ifs aninhados que podem ser fundidos:")
-    if not results:
-        print("  Nenhum caso identificado")
-        return
-
-    for i, tree in enumerate(results, 1):
-        print(f"\n  {i}. 🌿 Possível if aninhado fundível encontrado:")
-
-        # ➤ Condição exterior
-        try:
+    if results:
+        for i, tree in enumerate(results, 1):
+            print(f"\n  {i}. 🌿 Possível if aninhado fundível encontrado:")
+            
+            # Mostramos a condição principal
             if isinstance(tree.children[0], Tree) and tree.children[0].data == "bool_expr":
                 condicao_exterior = tree.children[0]
                 print("     📌 Condição exterior:")
                 print("      ➤", _format_bool_expr(condicao_exterior))
-        except Exception as e:
-            print("     ⚠️ Erro ao extrair condição exterior:", e)
-
-        # ➤ Condição interior (com navegação defensiva)
-        condicao_interior = None
-        try:
-            # Procuramos no 'command' do if exterior
-            for child in tree.children:
-                if isinstance(child, Tree) and child.data == "command":
-                    for sub in child.children:
-                        if isinstance(sub, Tree) and sub.data == "conditional":
-                            for inner_if in sub.children:
-                                if isinstance(inner_if, Tree) and inner_if.data == "check_command":
-                                    if isinstance(inner_if.children[0], Tree) and inner_if.children[0].data == "bool_expr":
-                                        condicao_interior = inner_if.children[0]
-                                        break
-        except Exception as e:
-            print("     ⚠️ Erro ao aceder à condição interior:", e)
-
-        if condicao_interior:
-            print("     📌 Condição interior:")
-            print("      ➤", _format_bool_expr(condicao_interior))
-        else:
-            print("     ⚠️ Nenhuma condição interior encontrada")
+            
+# Mostramos a condição interna
+            try:
+                cond_interna = tree.children[1].children[0].children[0].children[0]
+                if isinstance(cond_interna, Tree) and cond_interna.data == "bool_expr":
+                    print("     📌 Condição interior:")
+                    print("      ➤", _format_bool_expr(cond_interna))
+            except Exception as e:
+                print("     ⚠️ Erro ao extrair condição interior:", e)
+    else:
+        print("  Nenhum caso identificado")
 
 def _format_bool_expr(tree):
     """Tenta extrair uma expressão lógica legível de um bool_expr"""
