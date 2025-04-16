@@ -43,8 +43,6 @@ as variaveis das funções
 
 ## skill issues
 
-1. não está a conseguir ler a gramatica de um ficheiro
-
 ## estrutura de ficheiros
 
 - executador.py tem a main

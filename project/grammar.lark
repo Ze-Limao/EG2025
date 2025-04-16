@@ -92,7 +92,7 @@ TYPE: "int" | "double" | "tuple" | "string" | "array" | "bool" | "void"
 
 VAR: /[a-z]+(_[a-z]+)*/
 
-NUMBER: /-?\\d+(\\.\\d+)?/
+NUMBER: /-?\d+(\.\d+)?/
 
 STRING: /".*"/
 
