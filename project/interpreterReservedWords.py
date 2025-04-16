@@ -58,10 +58,27 @@ class InterpreterReservedWords(Interpreter):
         var = tree.children[1].value
         self._current_scope_vars[var] = {"tipo": tipo, "ocorr": 0, "redec":False}
 
+    #def allocation(self, tree):
+    #    var_token = tree.children[0]
+    #    if isinstance(var_token, Token) and var_token.type == "VAR":
+    #        self._register_var_usage(var_token.value)
+    #    self.visit_children(tree)
+
     def allocation(self, tree):
         var_token = tree.children[0]
         if isinstance(var_token, Token) and var_token.type == "VAR":
-            self._register_var_usage(var_token.value)
+            if self.current_func not in self.varReDec.keys():
+                self.varReDec[self.current_func] = [{var_token:self._current_scope_vars[var_token]}]
+                print(self._current_scope_vars[var_token]["ocorr"])
+                print(self.varReDec[self.current_func])
+                tipo = self._current_scope_vars[var_token]["tipo"]
+                self._current_scope_vars[var_token] = {"tipo": tipo, "ocorr": 0, "redec":True}
+            else:
+                self.varReDec[self.current_func] += [{var_token:self._current_scope_vars[var_token]}]
+                print(self._current_scope_vars[var_token]["ocorr"])
+                print(self.varReDec[self.current_func])
+                tipo = self._current_scope_vars[var_token]["tipo"]
+                self._current_scope_vars[var_token] = {"tipo": tipo, "ocorr": 0, "redec":True}
         self.visit_children(tree)
 
     def allocation_aux(self, tree):
@@ -71,6 +88,12 @@ class InterpreterReservedWords(Interpreter):
         self.visit_children(tree)
 
     def print_command(self, tree):
+        var_token = tree.children[0]
+        if isinstance(var_token, Token) and var_token.type == "VAR":
+            self._register_var_usage(var_token.value)
+        self.visit_children(tree)
+    
+    def array_access(self, tree):
         var_token = tree.children[0]
         if isinstance(var_token, Token) and var_token.type == "VAR":
             self._register_var_usage(var_token.value)

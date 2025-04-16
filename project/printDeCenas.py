@@ -70,8 +70,6 @@ def print_type_summary(varDec):
     for tipo, count in tipo_count.items():
         print(f"  - {tipo}: {count}")
 
-
-
 def print_analysis_results(results):
     print("\n📊 Total de instruções por tipo:")
     for tipo, total in results.items():

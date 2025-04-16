@@ -24,15 +24,18 @@ variable_declaration: "let" TYPE VAR "=" expr
 allocation_aux: VAR ASS_OP expr
         | VAR "++"
         | VAR "--"
-                    
+
+
+array_access: VAR "[" NUMBER "]"
+  
 allocation: VAR "=" expr
+        | array_access "=" expr
         | allocation_aux
         
 array_expr: "[" element_list? "]"
 
 element_list: NUMBER ("," NUMBER)*
 
-array_access: VAR "[" NUMBER "]"
 
 expr: VAR
     | NUMBER
@@ -41,6 +44,7 @@ expr: VAR
     | expr OP expr
     | expr LOGICAL_OP expr
     | array_expr
+    | array_access
     
 print_command: "show" "(" VAR ")"
         | "show" "(" NUMBER ")"
