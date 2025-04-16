@@ -119,6 +119,14 @@ class InterpreterCondicoesECiclos(Interpreter):
         self.visit_children(tree)
         self.control_stack.pop()
 
+    def foreach_loop(self, tree):
+        if self.control_stack:
+            self.aninhamentos += 1
+        self.counts["ciclos"] += 1
+        self.control_stack.append("foreach")
+        self.visit_children(tree)
+        self.control_stack.pop()
+
     def for_loop(self, tree):
         if self.control_stack:
             self.aninhamentos += 1

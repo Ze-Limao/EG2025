@@ -18,6 +18,8 @@ task sub(int a, int c) -> int {
 task main() -> int {
     let int i = 0;
     a++;
+    let array arr = [3,2,1];
+
     loop (i <= 5) {
         show(i);
         i++;
@@ -28,6 +30,10 @@ task main() -> int {
             break;    
         }
         show(j);
+    }
+
+    foreach (b in arr) {
+        show(b);
     }
     
     let int result = add(3, 4);
@@ -44,7 +50,6 @@ task main() -> int {
         show("x is greater than 5 and not 10");
     }
 
-    let array arr = [3,2,1];
 
     show(arr[2]);
 
@@ -63,5 +68,7 @@ task main() -> int {
             show("x is neither 5 nor 10");
     }
     
+
+
     return 0;
 }

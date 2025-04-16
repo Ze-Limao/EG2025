@@ -27,7 +27,7 @@ allocation_aux: VAR ASS_OP expr
 
 
 array_access: VAR "[" NUMBER "]"
-  
+
 allocation: VAR "=" expr
         | array_access "=" expr
         | allocation_aux
@@ -65,7 +65,9 @@ function_call: VAR "(" arg_list? ")"
 arg_list: expr "," arg_list
     | expr
 
-loop: for_loop | loop_loop
+foreach_loop: "foreach" "(" VAR "in" expr ")" "{" command* "}"
+
+loop: for_loop | loop_loop | foreach_loop
 
 for_loop: "for" "(" variable_declaration ";" for_cond ";" for_update ")" "{" command* "}" 
 

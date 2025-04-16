@@ -1,0 +1,17 @@
+task add(int a, int b) -> int {
+    return a + b;
+}
+
+task main() -> int {
+    let array arr = [3,2,1];
+
+    arr[2] = arr[1] + arr[2];
+
+    arr = [1,10,20];
+
+    foreach (b in arr) {
+        show(b);
+    }
+    
+    return arr[1];
+}
