@@ -48,7 +48,7 @@ def main():
 
     parser = Lark(grammar, parser="lalr")
 
-    with open("input2.txt") as f:
+    with open("input.txt") as f:
         prog = f.read()
     
     tree = parser.parse(prog)
@@ -62,7 +62,7 @@ def main():
 
     counts, aninhamentos, if_fundidos = analyzer2.summarize()
 
-    resultados_gerais = get_results_summary(varDec, varNotDec, varReDec)
+    declaradas, nao_declaradas, re_declaradas = get_results_summary(varDec, varNotDec, varReDec)
     warnings, erros = get_warnings_and_errors(varDec, varNotDec, varReDec)
     resumo_tipos = get_type_summary(varDec)
     resumo_instr = get_instruction_summary(counts)
@@ -71,7 +71,9 @@ def main():
     # Depois usas isso como input no gerador de HTML que já te mostrei:
     gerar_relatorio_html(
     prog,
-    resultados_gerais,
+    declaradas, 
+    nao_declaradas, 
+    re_declaradas,
     warnings,
     erros,
     resumo_tipos,

@@ -62,6 +62,37 @@
                 padding: 10px;
                 display: block;
             }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+                font-size: 14px;
+                background-color: #fff;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            th, td {
+                text-align: left;
+                padding: 12px 15px;
+                border-bottom: 1px solid #eee;
+            }
+
+            th {
+                background-color: #f3f4f6;
+                font-weight: 600;
+                color: #2c3e50;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            tr:hover {
+                background-color: #f1f5f9;
+                transition: background 0.3s ease;
+            }
         </style>
     </head>
     <body>
@@ -70,7 +101,7 @@
             <img src="logo.png" alt="Logo" style="height: 60px;">
         </div>
 
-        <div class="timestamp">Gerado em: 2025-04-16 16:50:08</div>
+        <div class="timestamp">Gerado em: 2025-04-16 18:39:39</div>
 
         <section>
                 <div id="cabecalho" class="titulo">
@@ -79,22 +110,80 @@
                 </div>
                 <div id="blocoCodigo" class="bloco-codigo">
                     <code>
-                    task add(int a, int b) -> int {
+                    
+task add(int a, int b) -> int {
+    let int arroz = 10;
+    let int arroz = 10;
+    check (a < 10) {
+        check (b > 0) {
+            b += 1;
+        }
+    }
+    a++;
+
     return a + b;
 }
 
+task sub(int a, int c) -> int {
+    return a - c;
+}
+
 task main() -> int {
+    let int i = 0;
+    a++;
     let array arr = [3,2,1];
 
-    arr[2] = arr[1] + arr[2];
-
-    arr = [1,10,20];
+    loop (i <= 5) {
+        show(i);
+        i++;
+    }
+    
+    for (let int j = 0; j < 3; j++) {
+        check(i == j) {
+            break;    
+        }
+        show(j);
+    }
 
     foreach (b in arr) {
         show(b);
     }
     
-    return arr[1];
+    let int result = add(3, 4);
+    show(result);
+    
+    let int x = 10;
+    check (x < 5) {
+        check (y > 11) {
+            show("x is less than 5");
+        }
+    } also (x == 10) {
+            show("x is 10");
+    } otherwise {
+        show("x is greater than 5 and not 10");
+    }
+
+
+    show(arr[2]);
+
+    arr[2] = arr[3];
+    
+    arr = [1,2,3];
+
+    i = 0;
+    
+    match (x) {
+        option 5:
+            show("x is 5");
+        option 10:
+            show("x is 10");
+        standard:
+            show("x is neither 5 nor 10");
+    }
+    
+
+
+    return 0;
 }
 
                     </code>
@@ -112,41 +201,202 @@ task main() -> int {
         </section>
         
         <section>
-            <h2> Variáveis e Declarações</h2>
-            <div class="mono">📦 Variáveis Declaradas (varDec):<br>
-  Função: add<br>    - a: tipo=int, ocorrências=1, redeclarado=False<br>    - b: tipo=int, ocorrências=1, redeclarado=False<br>
-  Função: main<br>    - arr: tipo=array, ocorrências=2, redeclarado=True<br>    - b: tipo=int, ocorrências=1, redeclarado=False<br>
-🚫 Variáveis Usadas mas Não Declaradas (varNotDec):<br>  (nenhuma)<br>
-♻️  Variáveis Re-declaradas (varReDec):<br>
-  Função: main<br>    - arr: tipo=array, ocorrências=3</div>
+          <h2>📦 Variáveis Declaradas</h2>
+          
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr style="background-color: #eef;">
+                    <th>Função</th>
+                    <th>Variável</th>
+                    <th>Tipo</th>
+                    <th>Ocorrências</th>
+                    <th>Re-declarada</th>
+                </tr>
+            </thead>
+            <tbody>
+        
+            <tr>
+                <td>add</td>
+                <td>a</td>
+                <td>int</td>
+                <td>3</td>
+                <td>❌</td>
+            </tr>
+            
+            <tr>
+                <td>add</td>
+                <td>b</td>
+                <td>int</td>
+                <td>3</td>
+                <td>❌</td>
+            </tr>
+            
+            <tr>
+                <td>add</td>
+                <td>arroz</td>
+                <td>int</td>
+                <td>0</td>
+                <td>✅</td>
+            </tr>
+            
+            <tr>
+                <td>sub</td>
+                <td>a</td>
+                <td>int</td>
+                <td>1</td>
+                <td>❌</td>
+            </tr>
+            
+            <tr>
+                <td>sub</td>
+                <td>c</td>
+                <td>int</td>
+                <td>1</td>
+                <td>❌</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>i</td>
+                <td>int</td>
+                <td>0</td>
+                <td>✅</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>arr</td>
+                <td>array</td>
+                <td>0</td>
+                <td>✅</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>j</td>
+                <td>int</td>
+                <td>4</td>
+                <td>❌</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>b</td>
+                <td>int</td>
+                <td>1</td>
+                <td>❌</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>result</td>
+                <td>int</td>
+                <td>1</td>
+                <td>❌</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>x</td>
+                <td>int</td>
+                <td>3</td>
+                <td>❌</td>
+            </tr>
+            </tbody></table>
         </section>
 
         <section>
+          <h2>🚫 Variáveis Não Declaradas</h2>
+          
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr style="background-color: #fdd;">
+                    <th>Função</th>
+                    <th>Variável</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+        
+            <tr>
+                <td>main</td>
+                <td>a</td>
+                <td>❗Não declarada</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>y</td>
+                <td>❗Não declarada</td>
+            </tr>
+            </tbody></table>
+        </section>
+
+        <section>
+          <h2>♻️ Variáveis Re-declaradas</h2>
+          
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr style="background-color: #ffd;">
+                    <th>Função</th>
+                    <th>Variável</th>
+                    <th>Tipo</th>
+                    <th>Ocorrências</th>
+                </tr>
+            </thead>
+            <tbody>
+        
+            <tr>
+                <td>add</td>
+                <td>arroz</td>
+                <td>int</td>
+                <td>0</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>arr</td>
+                <td>array</td>
+                <td>4</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>i</td>
+                <td>int</td>
+                <td>4</td>
+            </tr>
+            </tbody></table>
+        </section>
+
+
+        <section>
             <h2> Warnings e Erros</h2>
-            <div class="mono" style="color: #eead2d;")>⚠️ Warnings:<br>  - [Redeclared] 'arr' em 'main' foi redeclarada.</div>
+            <div class="mono" style="color: #eead2d;")>⚠️ Warnings:<br>  - [Unused] A última declaração de 'arroz' em 'add' nunca foi usada (ocorr=0) → pode ser apagada.<br>  - [Redeclared] 'arroz' em 'add' foi redeclarada.<br>  - [Unused] A última declaração de 'i' em 'main' nunca foi usada (ocorr=0) → pode ser apagada.<br>  - [Redeclared] 'i' em 'main' foi redeclarada.<br>  - [Unused] A última declaração de 'arr' em 'main' nunca foi usada (ocorr=0) → pode ser apagada.<br>  - [Redeclared] 'arr' em 'main' foi redeclarada.<br>  - [Redeclared & Unused] 'arroz' em 'add' foi redeclarada, mas a anterior nunca foi usada → pode ser apagada.</div>
             <div class="mono" style="color: red;">
-❌ Erros:<br>  Nenhuma variável usada sem declaração.</div>
+❌ Erros:<br>  - [Not Declared] 'a' foi usada em 'main' mas nunca foi declarada.<br>  - [Not Declared] 'y' foi usada em 'main' mas nunca foi declarada.</div>
         </section>
 
 
         <section>
             <h2> Total de Variáveis por Tipo de Dados</h2>
-            <div class="mono">int: 3<br>array: 1</div>
+            <div class="mono">int: 10<br>array: 1</div>
         </section>
 
         <section>
             <h2> Total de Instruções por Tipo</h2>
-            <div class="mono">Atribuições: 3<br>Escrita: 1<br>Condicionais: 0<br>Ciclos: 1</div>
+            <div class="mono">Atribuições: 15<br>Escrita: 8<br>Condicionais: 11<br>Ciclos: 3</div>
         </section>
 
         <section>
             <h2> Estruturas de Controlo Aninhadas</h2>
-            <div class="mono">0</div>
+            <div class="mono">3</div>
         </section>
 
         <section>
             <h2> Ifs Aninhados que Podem Ser Fundidos</h2>
-            <div class="mono">  Nenhum caso identificado.</div>
+            <div class="mono">
+1. 🌿 Possível if aninhado fundível encontrado:<br>     📌 Condição exterior:<br>      ➤ a < 10<br>     📌 Condição interior:<br>      ➤ b > 0</div>
         </section>
     </body>
     </html>

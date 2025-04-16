@@ -3,7 +3,9 @@ import os
 
 def gerar_relatorio_html(
     prog,
-    resultados_gerais,
+    declaradas,
+    nao_declaradas,
+    re_declaradas,
     warnings,
     erros,
     resumo_tipos,
@@ -20,6 +22,90 @@ def gerar_relatorio_html(
     def format_dict(dicionario):
         return "<br>".join([f"{k}: {v}" for k, v in dicionario.items()]) if dicionario else "<i>(sem dados)</i>"
 
+
+    def format_tabela_variaveis(lista):
+        if not lista:
+            return "<i>(nenhuma variável encontrada)</i>"
+        html = """
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr style="background-color: #eef;">
+                    <th>Função</th>
+                    <th>Variável</th>
+                    <th>Tipo</th>
+                    <th>Ocorrências</th>
+                    <th>Re-declarada</th>
+                </tr>
+            </thead>
+            <tbody>
+        """
+        for item in lista:
+            html += f"""
+            <tr>
+                <td>{item['função']}</td>
+                <td>{item['variável']}</td>
+                <td>{item['tipo']}</td>
+                <td>{item['ocorrências']}</td>
+                <td>{"✅" if item['re_declarada'] else "❌"}</td>
+            </tr>
+            """
+        html += "</tbody></table>"
+        return html
+    
+    
+    def format_tabela_nao_declaradas(lista):
+        if not lista:
+            return "<i>(nenhuma variável não declarada)</i>"
+        html = """
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr style="background-color: #fdd;">
+                    <th>Função</th>
+                    <th>Variável</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+        """
+        for item in lista:
+            html += f"""
+            <tr>
+                <td>{item['função']}</td>
+                <td>{item['variável']}</td>
+                <td>❗Não declarada</td>
+            </tr>
+            """
+        html += "</tbody></table>"
+        return html
+    
+    
+    def format_tabela_redeclaradas(lista):
+        if not lista:
+            return "<i>(nenhuma variável re-declarada)</i>"
+        html = """
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr style="background-color: #ffd;">
+                    <th>Função</th>
+                    <th>Variável</th>
+                    <th>Tipo</th>
+                    <th>Ocorrências</th>
+                </tr>
+            </thead>
+            <tbody>
+        """
+        for item in lista:
+            html += f"""
+            <tr>
+                <td>{item['função']}</td>
+                <td>{item['variável']}</td>
+                <td>{item['tipo']}</td>
+                <td>{item['ocorrências']}</td>
+            </tr>
+            """
+        html += "</tbody></table>"
+        return html
+    
     html = f"""
     <!DOCTYPE html>
     <html lang="pt">
@@ -84,6 +170,37 @@ def gerar_relatorio_html(
                 padding: 10px;
                 display: block;
             }}
+            table {{
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+                font-size: 14px;
+                background-color: #fff;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                border-radius: 10px;
+                overflow: hidden;
+            }}
+
+            th, td {{
+                text-align: left;
+                padding: 12px 15px;
+                border-bottom: 1px solid #eee;
+            }}
+
+            th {{
+                background-color: #f3f4f6;
+                font-weight: 600;
+                color: #2c3e50;
+            }}
+
+            tr:nth-child(even) {{
+                background-color: #f9f9f9;
+            }}
+
+            tr:hover {{
+                background-color: #f1f5f9;
+                transition: background 0.3s ease;
+            }}
         </style>
     </head>
     <body>
@@ -117,9 +234,20 @@ def gerar_relatorio_html(
         </section>
         
         <section>
-            <h2> Variáveis e Declarações</h2>
-            <div class="mono">{format_lista(resultados_gerais)}</div>
+          <h2>📦 Variáveis Declaradas</h2>
+          {format_tabela_variaveis(declaradas)}
         </section>
+
+        <section>
+          <h2>🚫 Variáveis Não Declaradas</h2>
+          {format_tabela_nao_declaradas(nao_declaradas)}
+        </section>
+
+        <section>
+          <h2>♻️ Variáveis Re-declaradas</h2>
+          {format_tabela_redeclaradas(re_declaradas)}
+        </section>
+
 
         <section>
             <h2> Warnings e Erros</h2>

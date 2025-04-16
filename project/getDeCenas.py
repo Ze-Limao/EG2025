@@ -1,35 +1,42 @@
 from lark import Tree
 
 def get_results_summary(varDec, varNotDec, varReDec):
-    linhas = ["📦 Variáveis Declaradas (varDec):"]
+    declaradas = []
+    nao_declaradas = []
+    re_declaradas = []
+
     for func, vars in varDec.items():
-        linhas.append(f"\n  Função: {func}")
         for var, props in vars.items():
-            tipo = props.get("tipo")
-            ocorr = props.get("ocorr")
-            redec = props.get("redec", False)
-            linhas.append(f"    - {var}: tipo={tipo}, ocorrências={ocorr}, redeclarado={redec}")
+            declaradas.append({
+                "função": func,
+                "variável": var,
+                "tipo": props.get("tipo"),
+                "ocorrências": props.get("ocorr"),
+                "re_declarada": props.get("redec", False)
+            })
 
-    linhas.append("\n🚫 Variáveis Usadas mas Não Declaradas (varNotDec):")
-    if varNotDec:
-        for var in varNotDec:
-            linhas.append(f"  - {var[1]} in {var[0]}")
-    else:
-        linhas.append("  (nenhuma)")
+    for func, var in varNotDec:
+        nao_declaradas.append({
+            "função": func,
+            "variável": var,
+            "tipo": "❓ não declarada",
+            "ocorrências": "-",
+            "re_declarada": False
+        })
 
-    linhas.append("\n♻️  Variáveis Re-declaradas (varReDec):")
-    if varReDec:
-        for func, entries in varReDec.items():
-            linhas.append(f"\n  Função: {func}")
-            for entry in entries:
-                for var, props in entry.items():
-                    tipo = props.get("tipo")
-                    ocorr = props.get("ocorr")
-                    linhas.append(f"    - {var}: tipo={tipo}, ocorrências={ocorr}")
-    else:
-        linhas.append("  (nenhuma)")
+    for func, entries in varReDec.items():
+        for entry in entries:
+            for var, props in entry.items():
+                re_declaradas.append({
+                    "função": func,
+                    "variável": var,
+                    "tipo": props.get("tipo"),
+                    "ocorrências": props.get("ocorr"),
+                    "re_declarada": True
+                })
 
-    return linhas
+    return declaradas, nao_declaradas, re_declaradas
+
 
 def get_warnings_and_errors(varDec, varNotDec, varReDec):
     outputWarnings = ["⚠️ Warnings:"]
