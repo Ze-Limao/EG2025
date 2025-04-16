@@ -1,0 +1,153 @@
+
+    <!DOCTYPE html>
+    <html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <title>Relatório de Análise</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', sans-serif;
+                background: #f9f9f9;
+                margin: 40px;
+                color: #333;
+            }
+            h1, h2 {
+                margin-top : 0px;
+                color: #2c3e50;
+            }
+            section {
+                margin-bottom: 20px;
+                padding: 20px;
+                border-radius: 10px;
+                background: #fff;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            }
+            .timestamp {
+                font-size: 0.9em;
+                color: #888;
+                text-align: right;
+            }
+            .mono {
+                font-family: monospace;
+                white-space: pre-wrap;
+            }
+
+            .titulo {
+                display: flex;
+                cursor: pointer;
+                user-select: none;
+            }
+
+            .seta {
+                font-size: 24px;
+                margin-right: 10px;
+                transition: transform 0.3s ease;
+            }
+
+            .seta.ativa {
+                transform: rotate(90deg);
+            }
+
+            .bloco-codigo {
+                margin-top: 10px;
+                display: none;
+                background-color: #f5f5f5;
+                border-radius: 6px;
+                font-family: 'Courier New', monospace;
+                font-size: 14px;
+                white-space: pre-wrap;
+            }
+
+            .bloco-codigo.visivel {
+                padding: 10px;
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="display: flex; justify-content: space-between;align-items: center;">
+            <h1 style="margin-bottom: 0px">Relatório de Análise de Código</h1>
+            <img src="logo.png" alt="Logo" style="height: 60px;">
+        </div>
+
+        <div class="timestamp">Gerado em: 2025-04-16 16:38:43</div>
+
+        <section>
+                <div id="cabecalho" class="titulo">
+                    <div id="seta" class="seta">➡️</div>
+                    <h2 style="margin-bottom: 0px"> Código</h2> 
+                </div>
+                <div id="blocoCodigo" class="bloco-codigo">
+                    <code>
+                    task add(int a, int b) -> int {
+    return a + b;
+}
+
+task main() -> int {
+    let array arr = [3,2,1];
+
+    arr[2] = arr[1] + arr[2];
+
+    arr = [1,10,20];
+
+    foreach (b in arr) {
+        show(b);
+    }
+    
+    return arr[1];
+}
+
+                    </code>
+                </div>
+            <script>
+                const seta = document.getElementById("seta");
+                const bloco = document.getElementById("blocoCodigo");
+
+                document.getElementById("cabecalho").addEventListener("click", () => {
+        
+                    seta.classList.toggle("ativa");
+                    bloco.classList.toggle("visivel");
+                });
+  </script>
+        </section>
+        
+        <section>
+            <h2> Variáveis e Declarações</h2>
+            <div class="mono">📦 Variáveis Declaradas (varDec):<br>
+  Função: add<br>    - a: tipo=int, ocorrências=1, redeclarado=False<br>    - b: tipo=int, ocorrências=1, redeclarado=False<br>
+  Função: main<br>    - arr: tipo=array, ocorrências=2, redeclarado=True<br>    - b: tipo=int, ocorrências=1, redeclarado=False<br>
+🚫 Variáveis Usadas mas Não Declaradas (varNotDec):<br>  (nenhuma)<br>
+♻️  Variáveis Re-declaradas (varReDec):<br>
+  Função: main<br>    - arr: tipo=array, ocorrências=3</div>
+        </section>
+
+        <section>
+            <h2> Warnings e Erros</h2>
+            <div class="mono" style="color: #eead2d;")>⚠️ Warnings:<br>  - [Redeclared] 'arr' em 'main' foi redeclarada.</div>
+            <div class="mono" style="color: red;">
+❌ Erros:<br>  Nenhuma variável usada sem declaração.</div>
+        </section>
+
+
+        <section>
+            <h2> Total de Variáveis por Tipo de Dados</h2>
+            <div class="mono">int: 3<br>array: 1</div>
+        </section>
+
+        <section>
+            <h2> Total de Instruções por Tipo</h2>
+            <div class="mono">Atribuições: 3<br>Escrita: 1<br>Condicionais: 0<br>Ciclos: 1</div>
+        </section>
+
+        <section>
+            <h2> Estruturas de Controlo Aninhadas</h2>
+            <div class="mono">0</div>
+        </section>
+
+        <section>
+            <h2> Ifs Aninhados que Podem Ser Fundidos</h2>
+            <div class="mono">  Nenhum caso identificado.</div>
+        </section>
+    </body>
+    </html>
+    

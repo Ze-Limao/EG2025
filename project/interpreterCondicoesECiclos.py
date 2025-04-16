@@ -4,10 +4,10 @@ from lark import Tree
 class InterpreterCondicoesECiclos(Interpreter):
     def __init__(self):
         self.counts = {
-            "atribuicoes": 0,
-            "escrita": 0,
-            "condicionais": 0,
-            "ciclos": 0
+            "Atribuições": 0,
+            "Escrita": 0,
+            "Condicionais": 0,
+            "Ciclos": 0
         }
         self.aninhamentos = 0
         self.if_fundidos = []  # lista de tuplos com nós ou info dos ifs fundíveis
@@ -38,30 +38,30 @@ class InterpreterCondicoesECiclos(Interpreter):
         self.visit_children(tree)
 
     def allocation(self, tree):
-        self.counts["atribuicoes"] += 1
+        self.counts["Atribuições"] += 1
 
     def allocation_aux(self, tree):
-        self.counts["atribuicoes"] += 1
+        self.counts["Atribuições"] += 1
 
     def variable_declaration(self, tree):
-        self.counts["atribuicoes"] += 1
+        self.counts["Atribuições"] += 1
 
     def print_command(self, tree):
-        self.counts["escrita"] += 1
+        self.counts["Escrita"] += 1
 
     def option_command(self, tree):
-        self.counts["condicionais"] += 1
+        self.counts["Condicionais"] += 1
     def standard_command(self,tree):
-        self.counts["condicionais"] += 1
+        self.counts["Condicionais"] += 1
 
     def print_command(self, tree):
-        self.counts["escrita"] += 1
+        self.counts["Escrita"] += 1
 
     def check_command(self, tree):
         if self.control_stack:
             self.aninhamentos += 1
     
-        self.counts["condicionais"] += 1
+        self.counts["Condicionais"] += 1
         self.control_stack.append("check")
     
         subchecks = 0
@@ -96,17 +96,17 @@ class InterpreterCondicoesECiclos(Interpreter):
 
 
     def also_command(self, tree):
-        self.counts["condicionais"] += 1
+        self.counts["Condicionais"] += 1
         self.visit_children(tree)
 
     def otherwise_command(self, tree):
-        self.counts["condicionais"] += 1
+        self.counts["Condicionais"] += 1
         self.visit_children(tree)
 
     def match_command(self, tree):
         if self.control_stack:
             self.aninhamentos += 1
-        self.counts["condicionais"] += 1
+        self.counts["Condicionais"] += 1
         self.control_stack.append("match")
         self.visit_children(tree)
         self.control_stack.pop()
@@ -114,7 +114,7 @@ class InterpreterCondicoesECiclos(Interpreter):
     def loop_loop(self, tree):
         if self.control_stack:
             self.aninhamentos += 1
-        self.counts["ciclos"] += 1
+        self.counts["Ciclos"] += 1
         self.control_stack.append("loop")
         self.visit_children(tree)
         self.control_stack.pop()
@@ -122,7 +122,7 @@ class InterpreterCondicoesECiclos(Interpreter):
     def foreach_loop(self, tree):
         if self.control_stack:
             self.aninhamentos += 1
-        self.counts["ciclos"] += 1
+        self.counts["Ciclos"] += 1
         self.control_stack.append("foreach")
         self.visit_children(tree)
         self.control_stack.pop()
@@ -130,7 +130,7 @@ class InterpreterCondicoesECiclos(Interpreter):
     def for_loop(self, tree):
         if self.control_stack:
             self.aninhamentos += 1
-        self.counts["ciclos"] += 1
+        self.counts["Ciclos"] += 1
         self.control_stack.append("for")
         self.visit_children(tree)
         self.control_stack.pop()
