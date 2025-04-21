@@ -2,25 +2,19 @@
 
 ## OBJETIVOS PRINCIPAIS A IMPLEMENTAR
 
-1. Lista de todas as vari´aveis do programa indicando os casos de: redeclara¸c˜ao ou n˜ao-declara¸c˜ao; vari´aveis
-   usadas mas n˜ao inicializadas; vari´aveis declaradas e nunca mencionadas.
-2. Total de var´aveis declaradas por cada Tipo de dados usados.
-3. Total de instru¸c˜oes que formam o corpo do programa, indicando o n´umero de instru¸c˜oes de cada tipo (atribui¸c˜oes,
-   leitura e escrita, condicionais e c´ıclicas).
-4. Total de situa¸c˜oes em que estruturas de controlo surgem aninhadas em outras estruturas de controlo do mesmo
-   ou de tipos diferentes.
-5. Lista de situa¸c˜oes em que existam ifs aninhados que possam ser substitu´ıdos por um s´o if
+1. Lista de todas as variáveis do programa indicando os casos de: redeclaração ou não-declaração; variáveis usadas mas não inicializadas; variáveis declaradas e nunca mencionadas.
+2. Total de varáveis declaradas por cada Tipo de dados usados.
+3. Total de instruções que formam o corpo do programa, indicando o numero de instruções de cada tipo (atribuições, leitura e escrita, condicionais e cíclicas).
+4. Total de situações em que estruturas de controlo surgem aninhadas em outras estruturas de controlo do mesmo ou de tipos diferentes.
+5. Lista de situações em que existam ifs aninhados que possam ser substituídos por um só if
 
 ## IMPLEMENTADOS
 
-1. Lista de todas as vari´aveis do programa indicando os casos de: redeclara¸c˜ao ou n˜ao-declara¸c˜ao; vari´aveis
-   usadas mas n˜ao inicializadas; vari´aveis declaradas e nunca mencionadas.
-2. Total de var´aveis declaradas por cada Tipo de dados usados.
-3. Total de instru¸c˜oes que formam o corpo do programa, indicando o n´umero de instru¸c˜oes de cada tipo (atribui¸c˜oes,
-   leitura e escrita, condicionais e c´ıclicas).
-4. Total de situa¸c˜oes em que estruturas de controlo surgem aninhadas em outras estruturas de controlo do mesmo
-   ou de tipos diferentes.
-5. Lista de situa¸c˜oes em que existam ifs aninhados que possam ser substitu´ıdos por um s´o if
+1. Lista de todas as variáveis do programa indicando os casos de: redeclaração ou não-declaração; variáveis usadas mas não inicializadas; variáveis declaradas e nunca mencionadas.
+2. Total de varáveis declaradas por cada Tipo de dados usados.
+3. Total de instruções que formam o corpo do programa, indicando o numero de instruções de cada tipo (atribuições, leitura e escrita, condicionais e cíclicas).
+4. Total de situações em que estruturas de controlo surgem aninhadas em outras estruturas de controlo do mesmo ou de tipos diferentes.
+5. Lista de situações em que existam ifs aninhados que possam ser substituídos por um só if
 
 ## o que eu quero
 

@@ -48,7 +48,7 @@ def main():
 
     parser = Lark(grammar, parser="lalr")
 
-    with open("input.txt") as f:
+    with open("input2.txt") as f:
         prog = f.read()
     
     tree = parser.parse(prog)

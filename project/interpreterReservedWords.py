@@ -61,14 +61,17 @@ class InterpreterReservedWords(Interpreter):
     def allocation(self, tree):
         var_token = tree.children[0]
         if isinstance(var_token, Token) and var_token.type == "VAR":
-            if self.current_func not in self.varReDec.keys():
-                self.varReDec[self.current_func] = [{var_token:self._current_scope_vars[var_token]}]
-                tipo = self._current_scope_vars[var_token]["tipo"]
-                self._current_scope_vars[var_token] = {"tipo": tipo, "ocorr": 0, "redec":True}
+            if var_token not in self._current_scope_vars.keys():
+                self.varNotDec.append([self.current_func,var_token])
             else:
-                self.varReDec[self.current_func] += [{var_token:self._current_scope_vars[var_token]}]
-                tipo = self._current_scope_vars[var_token]["tipo"]
-                self._current_scope_vars[var_token] = {"tipo": tipo, "ocorr": 0, "redec":True}
+                if self.current_func not in self.varReDec.keys():
+                    self.varReDec[self.current_func] = [{var_token:self._current_scope_vars[var_token]}]
+                    tipo = self._current_scope_vars[var_token]["tipo"]
+                    self._current_scope_vars[var_token] = {"tipo": tipo, "ocorr": 0, "redec":True}
+                else:
+                    self.varReDec[self.current_func] += [{var_token:self._current_scope_vars[var_token]}]
+                    tipo = self._current_scope_vars[var_token]["tipo"]
+                    self._current_scope_vars[var_token] = {"tipo": tipo, "ocorr": 0, "redec":True}
         self.visit_children(tree)
 
     def allocation_aux(self, tree):
