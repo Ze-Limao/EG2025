@@ -24,22 +24,10 @@
 
 ## o que eu quero
 
-varDec = {"funcName":{"nomeVar":{tipo:"", ocorr:N},
-"nomeVar":{tipo:"", ocorr:N},
-},
-"funcName":{"nomeVar":{tipo:"", ocorr:N},
-"nomeVar":{tipo:"", ocorr:N},
-},
-}
-varNotDec = []
-varReDec = {"funcName":{"nomeVar":{tipo:"", ocorr:N},
-"nomeVar":{tipo:"", ocorr:N},
-},}
-
-as variaveis das funções
--> Função, nome, tipo, numero de ocorrencias
--> lista de declaradas
--> se n estiver na lista de declaradas quando usada adicionar à lista de não declaradas: nome,
+as variaveis das funções\
+-> Função, nome, tipo, numero de ocorrencias\
+-> lista de declaradas\
+-> se n estiver na lista de declaradas quando usada adicionar à lista de não declaradas: nome
 
 ## skill issues
 

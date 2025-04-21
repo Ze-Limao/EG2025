@@ -72,7 +72,7 @@ bool_expr: expr LOGICAL_OP expr
 
 TYPE.2: "int" | "double" | "string" | "set" | "array" | "tuplo"
 VAR: /[a-z]+(_[a-z]+)*/
-NUMBER: /-?\\d+(\\.\\d+)?/
+NUMBER: /-?\d+(\.\d+)?/
 STRING: /".*"/
 OP: "+" | "-" | "*" | "/"
 LOGICAL_OP: "==" | "!=" | "<=" | ">=" | "<" | ">"

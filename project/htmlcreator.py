@@ -19,8 +19,16 @@ def gerar_relatorio_html(
     def format_lista(lista):
         return "<br>".join(lista) if lista else "<i>(sem dados)</i>"
 
-    def format_dict(dicionario):
-        return "<br>".join([f"{k}: {v}" for k, v in dicionario.items()]) if dicionario else "<i>(sem dados)</i>"
+    def format_dict(dados):
+        return '\n'.join(f'<tr><td>{tipo}</td><td>{total}</td></tr>' for tipo, total in dados.items())
+
+    def format_lista2(lista):
+        linhas = []
+        for item in lista:
+            if ":" in item:
+                tipo, total = item.split(":", 1)
+                linhas.append(f'<tr><td>{tipo.strip()}</td><td>{total.strip()}</td></tr>')
+        return '\n'.join(linhas)
 
 
     def format_tabela_variaveis(lista):
@@ -257,14 +265,28 @@ def gerar_relatorio_html(
 
 
         <section>
-            <h2> Total de Variáveis por Tipo de Dados</h2>
-            <div class="mono">{format_dict(resumo_tipos)}</div>
+            <h2>Total de Variáveis por Tipo de Dados</h2>
+            <table>
+                <tr>
+                    <th>Tipo de Dado</th>
+                    <th>Total</th>
+                </tr>
+                {format_dict(resumo_tipos)}
+            </table>
         </section>
 
+
         <section>
-            <h2> Total de Instruções por Tipo</h2>
-            <div class="mono">{format_lista(resumo_instr)}</div>
+            <h2>Total de Instruções por Tipo</h2>
+            <table>
+                <tr>
+                    <th>Tipo de Instrução</th>
+                    <th>Total</th>
+                </tr>
+                {format_lista2(resumo_instr)}
+            </table>
         </section>
+
 
         <section>
             <h2> Estruturas de Controlo Aninhadas</h2>
