@@ -40,6 +40,7 @@ def get_results_summary(varDec, varNotDec, varReDec):
 
 def get_warnings_and_errors(varDec, varNotDec, varReDec):
     outputWarnings = ["⚠️ Warnings:"]
+    outputErros = ["\n❌ Erros:"]
     
     for func, vars in varDec.items():
         for var, props in vars.items():
@@ -57,12 +58,10 @@ def get_warnings_and_errors(varDec, varNotDec, varReDec):
                 if props.get("ocorr") == 0:
                     outputWarnings.append(f"  - [Redeclared & Unused] '{var}' em '{func}' foi redeclarada, mas a anterior nunca foi usada → pode ser apagada.")
 
-        outputErros =["\n❌ Erros:"]
     if varNotDec:
         for var in varNotDec:
             outputErros.append(f"  - [Not Declared] '{var[1]}' foi usada em '{var[0]}' mas nunca foi declarada.")
-    else:
-        outputErros.append("  Nenhuma variável usada sem declaração.")
+
 
     return outputWarnings, outputErros
 
