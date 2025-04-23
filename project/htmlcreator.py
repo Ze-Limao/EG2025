@@ -294,8 +294,17 @@ def gerar_relatorio_html(
         </section>
 
         <section>
-            <h2> Ifs Aninhados que Podem Ser Fundidos</h2>
-            <div class="mono">{format_lista(ifs_fundidos)}</div>
+            <h2>Ifs Aninhados que Podem Ser Fundidos</h2>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Função</th>
+                    <th>Condição Exterior</th>
+                    <th>Condição Interior</th>
+                    <th>Nova condição</th>
+                </tr>
+                {(ifs_fundidos)}
+            </table>
         </section>
     </body>
     </html>

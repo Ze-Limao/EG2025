@@ -90,24 +90,27 @@ def get_nested_summary(results):
 def get_possible_fused_ifs(results):
     linhas = []
     if results:
-        for i, tree in enumerate(results, 1):
-            linhas.append(f"\n{i}. 🌿 Possível if aninhado fundível encontrado:")
+        for i, (tree, funcName) in enumerate(results, 1):
+            cond_exterior = "—"
+            cond_interior = "—"
+
             if isinstance(tree.children[0], Tree) and tree.children[0].data == "bool_expr":
-                condicao_exterior = tree.children[0]
-                linhas.append("     📌 Condição exterior:")
-                linhas.append("      ➤ " + _format_bool_expr(condicao_exterior))
+                cond_exterior = _format_bool_expr(tree.children[0])
 
             try:
                 cond_interna = tree.children[1].children[0].children[0].children[0]
                 if isinstance(cond_interna, Tree) and cond_interna.data == "bool_expr":
-                    linhas.append("     📌 Condição interior:")
-                    linhas.append("      ➤ " + _format_bool_expr(cond_interna))
+                    cond_interior = _format_bool_expr(cond_interna)
             except Exception as e:
-                linhas.append("     ⚠️ Erro ao extrair condição interior: " + str(e))
-    else:
-        linhas.append("  Nenhum caso identificado.")
-    return linhas
+                cond_interior = f"⚠ Erro: {str(e)}"
 
+            linhas.append(
+                f"<tr><td>{i}</td><td>{funcName}</td><td>{cond_exterior}</td><td>{cond_interior}</td><td>{cond_exterior} && {cond_interior}</td></tr>"
+            )
+    else:
+        linhas.append('<tr><td colspan="4">Nenhum caso identificado.</td></tr>')
+
+    return "\n".join(linhas)
 
 def _format_bool_expr(tree):
     """Tenta extrair uma expressão lógica legível de um bool_expr"""

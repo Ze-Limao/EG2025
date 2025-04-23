@@ -101,7 +101,7 @@
             <img src="logo.png" alt="Logo" style="height: 60px;">
         </div>
 
-        <div class="timestamp">Gerado em: 2025-04-21 19:58:38</div>
+        <div class="timestamp">Gerado em: 2025-04-23 12:32:21</div>
 
         <section>
                 <div id="cabecalho" class="titulo">
@@ -110,24 +110,80 @@
                 </div>
                 <div id="blocoCodigo" class="bloco-codigo">
                     <code>
-                    task add(int a, int b) -> int {
-    a = 10;
-    c = 10;
+                    
+task add(int a, int b) -> int {
+    let int arroz = 10;
+    let int arroz = 10;
+    check (a < 10) {
+        check (b > 0) {
+            b += 1;
+        }
+    }
+    a++;
+
     return a + b;
 }
 
+task sub(int a, int c) -> int {
+    return a - c;
+}
+
 task main() -> int {
+    let int i = 0;
+    a++;
     let array arr = [3,2,1];
 
-    arr[2] = arr[1] + arr[2];
-
-    arr = [1,10,20];
+    loop (i <= 5) {
+        show(i);
+        i++;
+    }
+    
+    for (let int j = 0; j < 3; j++) {
+        check(i == j) {
+            break;    
+        }
+        show(j);
+    }
 
     foreach (b in arr) {
         show(b);
     }
     
-    return arr[1];
+    let int result = add(3, 4);
+    show(result);
+    
+    let int x = 10;
+    check (x < 5) {
+        check (y > 11) {
+            show("x is less than 5");
+        }
+    } also (x == 10) {
+            show("x is 10");
+    } otherwise {
+        show("x is greater than 5 and not 10");
+    }
+
+
+    show(arr[2]);
+
+    arr[2] = arr[3];
+    
+    arr = [1,2,3];
+
+    i = 0;
+    
+    match (x) {
+        option 5:
+            show("x is 5");
+        option 10:
+            show("x is 10");
+        standard:
+            show("x is neither 5 nor 10");
+    }
+    
+
+
+    return 0;
 }
 
                     </code>
@@ -163,12 +219,68 @@ task main() -> int {
                 <td>add</td>
                 <td>a</td>
                 <td>int</td>
-                <td>1</td>
-                <td>✅</td>
+                <td>3</td>
+                <td>❌</td>
             </tr>
             
             <tr>
                 <td>add</td>
+                <td>b</td>
+                <td>int</td>
+                <td>3</td>
+                <td>❌</td>
+            </tr>
+            
+            <tr>
+                <td>add</td>
+                <td>arroz</td>
+                <td>int</td>
+                <td>0</td>
+                <td>✅</td>
+            </tr>
+            
+            <tr>
+                <td>sub</td>
+                <td>a</td>
+                <td>int</td>
+                <td>1</td>
+                <td>❌</td>
+            </tr>
+            
+            <tr>
+                <td>sub</td>
+                <td>c</td>
+                <td>int</td>
+                <td>1</td>
+                <td>❌</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>i</td>
+                <td>int</td>
+                <td>0</td>
+                <td>✅</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>arr</td>
+                <td>array</td>
+                <td>0</td>
+                <td>✅</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>j</td>
+                <td>int</td>
+                <td>4</td>
+                <td>❌</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
                 <td>b</td>
                 <td>int</td>
                 <td>1</td>
@@ -177,17 +289,17 @@ task main() -> int {
             
             <tr>
                 <td>main</td>
-                <td>arr</td>
-                <td>array</td>
-                <td>2</td>
-                <td>✅</td>
+                <td>result</td>
+                <td>int</td>
+                <td>1</td>
+                <td>❌</td>
             </tr>
             
             <tr>
                 <td>main</td>
-                <td>b</td>
+                <td>x</td>
                 <td>int</td>
-                <td>1</td>
+                <td>3</td>
                 <td>❌</td>
             </tr>
             </tbody></table>
@@ -207,8 +319,14 @@ task main() -> int {
             <tbody>
         
             <tr>
-                <td>add</td>
-                <td>c</td>
+                <td>main</td>
+                <td>a</td>
+                <td>❗Não declarada</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>y</td>
                 <td>❗Não declarada</td>
             </tr>
             </tbody></table>
@@ -230,7 +348,7 @@ task main() -> int {
         
             <tr>
                 <td>add</td>
-                <td>a</td>
+                <td>arroz</td>
                 <td>int</td>
                 <td>0</td>
             </tr>
@@ -239,7 +357,14 @@ task main() -> int {
                 <td>main</td>
                 <td>arr</td>
                 <td>array</td>
-                <td>3</td>
+                <td>4</td>
+            </tr>
+            
+            <tr>
+                <td>main</td>
+                <td>i</td>
+                <td>int</td>
+                <td>4</td>
             </tr>
             </tbody></table>
         </section>
@@ -247,9 +372,9 @@ task main() -> int {
 
         <section>
             <h2> Warnings e Erros</h2>
-            <div class="mono" style="color: #eead2d;")>⚠️ Warnings:<br>  - [Redeclared] 'a' em 'add' foi redeclarada.<br>  - [Redeclared] 'arr' em 'main' foi redeclarada.<br>  - [Redeclared & Unused] 'a' em 'add' foi redeclarada, mas a anterior nunca foi usada → pode ser apagada.</div>
+            <div class="mono" style="color: #eead2d;")>⚠️ Warnings:<br>  - [Unused] A última declaração de 'arroz' em 'add' nunca foi usada (ocorr=0) → pode ser apagada.<br>  - [Redeclared] 'arroz' em 'add' foi redeclarada.<br>  - [Unused] A última declaração de 'i' em 'main' nunca foi usada (ocorr=0) → pode ser apagada.<br>  - [Redeclared] 'i' em 'main' foi redeclarada.<br>  - [Unused] A última declaração de 'arr' em 'main' nunca foi usada (ocorr=0) → pode ser apagada.<br>  - [Redeclared] 'arr' em 'main' foi redeclarada.<br>  - [Redeclared & Unused] 'arroz' em 'add' foi redeclarada, mas a anterior nunca foi usada → pode ser apagada.</div>
             <div class="mono" style="color: red;">
-❌ Erros:<br>  - [Not Declared] 'c' foi usada em 'add' mas nunca foi declarada.</div>
+❌ Erros:<br>  - [Not Declared] 'a' foi usada em 'main' mas nunca foi declarada.<br>  - [Not Declared] 'y' foi usada em 'main' mas nunca foi declarada.</div>
         </section>
 
 
@@ -260,7 +385,7 @@ task main() -> int {
                     <th>Tipo de Dado</th>
                     <th>Total</th>
                 </tr>
-                <tr><td>int</td><td>3</td></tr>
+                <tr><td>int</td><td>10</td></tr>
 <tr><td>array</td><td>1</td></tr>
             </table>
         </section>
@@ -273,22 +398,31 @@ task main() -> int {
                     <th>Tipo de Instrução</th>
                     <th>Total</th>
                 </tr>
-                <tr><td>Atribuições</td><td>5</td></tr>
-<tr><td>Escrita</td><td>1</td></tr>
-<tr><td>Condicionais</td><td>0</td></tr>
-<tr><td>Ciclos</td><td>1</td></tr>
+                <tr><td>Atribuições</td><td>15</td></tr>
+<tr><td>Escrita</td><td>8</td></tr>
+<tr><td>Condicionais</td><td>11</td></tr>
+<tr><td>Ciclos</td><td>3</td></tr>
             </table>
         </section>
 
 
         <section>
             <h2> Estruturas de Controlo Aninhadas</h2>
-            <div class="mono">0</div>
+            <div class="mono">3</div>
         </section>
 
         <section>
-            <h2> Ifs Aninhados que Podem Ser Fundidos</h2>
-            <div class="mono">  Nenhum caso identificado.</div>
+            <h2>Ifs Aninhados que Podem Ser Fundidos</h2>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Função</th>
+                    <th>Condição Exterior</th>
+                    <th>Condição Interior</th>
+                    <th>Nova condição</th>
+                </tr>
+                <tr><td>1</td><td>add</td><td>a < 10</td><td>b > 0</td><td>a < 10 && b > 0</td></tr>
+            </table>
         </section>
     </body>
     </html>

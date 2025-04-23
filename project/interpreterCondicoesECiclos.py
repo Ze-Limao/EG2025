@@ -12,12 +12,15 @@ class InterpreterCondicoesECiclos(Interpreter):
         self.aninhamentos = 0
         self.if_fundidos = []  # lista de tuplos com nós ou info dos ifs fundíveis
         self.control_stack = []  # stack de estruturas de controlo para cenas aninhadas
+        self.funcName = "main"
 
     def start(self, tree):
         self.visit_children(tree)
 
     def function_def(self, tree):
+        self.funcName = tree.children[0].value
         self.visit_children(tree)
+        self.funcName = "main"
 
     def return_command(self, tree):
         self.visit_children(tree)
@@ -88,7 +91,7 @@ class InterpreterCondicoesECiclos(Interpreter):
 
     
         if subchecks == 1 and other_commands == 0:
-            self.if_fundidos.append(tree)
+            self.if_fundidos.append([tree,self.funcName])
     
         self.visit_children(tree)
         self.control_stack.pop()
